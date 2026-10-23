@@ -1,0 +1,6 @@
+{
+  "name": "MedVet Gabrielly - Cuidados Veterinários & Pet Sitter",
+  "description": "Atendimento domiciliar, pet sitter com olhar clínico, dog walker e administração de medicação em Valinhos, Vinhedo e Campinas por Gabrielly Kind.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
