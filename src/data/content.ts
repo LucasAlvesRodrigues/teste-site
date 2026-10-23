@@ -1,198 +1,160 @@
-import { ServiceItem, Testimonial, FaqItem } from '../types';
+import { Differential, Pet, Service, Step, Testimonial } from '../types';
 
-export const IMAGES = {
-  hero: '/src/assets/images/hero_gabrielly_petcare_1792724416800.jpg',
-  portrait: '/src/assets/images/gabrielly_portrait_1792724417086.jpg',
-  serviceCats: '/src/assets/images/service_cats_homecare_1792724418365.jpg',
-  serviceVet: '/src/assets/images/service_vet_care_1792724418611.jpg',
-  serviceDogWalking: '/src/assets/images/service_dog_walking_1792724418922.jpg',
-};
+/**
+ * Conteúdo reunido de medvetgabrielly.com, do perfil PetHost e do perfil Sittsy
+ * da Gabrielly (outubro de 2026). Fotos em /public/img vêm do perfil Sittsy.
+ */
 
-export const CONTACT_INFO = {
+export const CONTACT = {
   name: 'Gabrielly Kind de Souza',
-  brandName: 'MedVet Gabrielly',
-  phone: '5519999999999', // Template number ready for direct WhatsApp dispatch
-  displayPhone: '(19) 99874-2105',
-  instagram: 'medvetgabrielly',
+  whatsapp: '5535999772945',
+  displayPhone: '(35) 99977-2945',
+  instagram: '@medvetgabrielly',
   instagramUrl: 'https://www.instagram.com/medvetgabrielly/',
-  regions: ['Valinhos', 'Vinhedo', 'Campinas (regiões próximas)', 'Joapiranga', 'Paiquerê', 'Jardim Paiquerê', 'Dois Córregos'],
-  email: 'contato@medvetgabrielly.com',
+  sittsyUrl: 'https://br.sittsy.com/pet-sitter/gabrielly-kind-de-souza--valinhos',
+  pethostUrl: 'https://pethost.com.br/perfil/gabriellykind',
+  regions: 'Valinhos, Vinhedo, Campinas e região',
 };
 
-export const SERVICES: ServiceItem[] = [
+export const whatsappLink = (text?: string) =>
+  `https://wa.me/${CONTACT.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
+
+export const DEFAULT_WA_TEXT = 'Olá, Gabrielly! Vim pelo site e gostaria de um orçamento.';
+
+export const NAV_LINKS = [
+  { href: '#servicos', label: 'Serviços' },
+  { href: '#sobre', label: 'Sobre mim' },
+  { href: '#como-funciona', label: 'Como funciona' },
+  { href: '#onde-contratar', label: 'Onde contratar' },
+];
+
+export const TRUST = [
+  { title: 'Identidade verificada', text: 'e Certificado Sittsy (out/2026)' },
+  { title: 'Auxiliar de Veterinária', text: 'curso validado pela PetHost' },
+  { title: 'Cães e gatos', text: 'de pequeno, médio e grande porte' },
+  { title: 'Encontro prévio gratuito', text: 'para conhecer você e seu pet' },
+];
+
+export const MARQUEE = ['Valinhos', 'Vinhedo', 'Campinas e região', 'Fins de semana', 'Horários flexíveis', 'Cães e gatos'];
+
+export const SERVICES: Service[] = [
   {
-    id: 'pet_sitter',
-    title: 'Pet Sitter Domiciliar Especializado',
-    tagline: 'Cuidado afetuoso no ambiente seguro da sua própria casa',
-    description: 'Seu pet não precisa passar pelo estresse de adaptação em hotéis ou gaiolas. Visitas presenciais completas com alimentação fresca, higienização rigorosa, brincadeiras de enriquecimento ambiental e muito carinho.',
-    image: IMAGES.serviceCats,
-    highlights: [
-      'Alimentação regrada e água fresca com fontes higienizadas',
-      'Limpeza de caixas de areia felinas e tapetes higiênicos',
-      'Brincadeiras cognitivas e estímulo com carinho no ritmo do pet',
-      'Relatório detalhado em tempo real com fotos e vídeos via WhatsApp',
-      'Cuidados da casa: recolhimento de correspondência e rega de plantas'
-    ],
-    duration: '45 a 60 minutos por visita',
-    recommendedFor: 'Gatos que odeiam sair de casa, cães tímidos, animais idosos ou famílias com múltiplos pets.',
-    basePrice: 55,
+    title: 'Passeios personalizados',
+    description: 'Exercício, diversão e segurança no ritmo do seu pet, do filhote cheio de energia ao idoso que gosta de ir com calma.',
+    image: '/img/passeio-jardim.jpg',
+    alt: 'Cãozinho passeando em um jardim',
+    tag: 'Na sua casa',
+    formValue: 'Passeio',
+    imgClass: 'pos-br',
   },
   {
-    id: 'vet_care',
-    title: 'Cuidados Clínicos & Medicação Especial',
-    tagline: 'A tranquilidade do conhecimento veterinário na sua ausência',
-    description: 'Administração com rigor técnico de tratamentos médicos prescritos pelo veterinário de confiança da família. Olhar clínico atento a parâmetros de bem-estar, apetite, hidratação e recuperação.',
-    image: IMAGES.serviceVet,
-    highlights: [
-      'Administração de medicação oral, tópica, colírios e otológicos',
-      'Aplicação de insulina e monitoramento de glicemia para pets diabéticos',
-      'Acompanhamento de pós-operatório e troca cuidadosa de curativos',
-      'Avaliação atenta a sinais clínicos de desconforto ou dor',
-      'Canal de comunicação aberto com o médico veterinário prescritor'
-    ],
-    duration: 'Visitas dedicadas conforme prescrição',
-    recommendedFor: 'Animais em recuperação cirúrgica, nefropatas, cardiopatas, diabéticos ou em antibioticoterapia.',
-    basePrice: 75,
+    title: 'Visitas domiciliares',
+    description: 'Alimentação, água fresca, limpeza, brincadeiras e companhia no conforto de casa, sem o estresse de hotelzinho.',
+    image: '/img/pet-pepe-serena.jpg',
+    alt: 'Gabrielly com uma gatinha no colo',
+    tag: 'Na sua casa',
+    formValue: 'Visita domiciliar',
   },
   {
-    id: 'dog_walking',
-    title: 'Dog Walker & Passeios Educativos',
-    tagline: 'Gasto de energia física e mental com respeito e segurança',
-    description: 'Passeios individuais e personalizados para cães, priorizando rotas seguras, enriquecimento olfativo, ritmo fisiológico adequado para a idade e reforço positivo.',
-    image: IMAGES.serviceDogWalking,
-    highlights: [
-      'Passeios individuais (ou apenas cães da mesma família)',
-      'Atenção estrita à temperatura do asfalto e horários amenos',
-      'Hidratação com água fresca durante todo o percurso',
-      'Enriquecimento sensorial: permissão para farejar com calma',
-      'Higienização de patinhas e patas ao retornar para casa'
-    ],
-    duration: '40 a 50 minutos',
-    recommendedFor: 'Cães com excesso de energia, ansiedade por separação ou que precisam manter condicionamento físico.',
-    basePrice: 50,
+    title: 'Cuidados dia e noite',
+    description: 'Cuido do seu pet durante o dia e passo a noite na sua casa, para ele não ficar sozinho enquanto você está fora.',
+    image: '/img/soneca.jpg',
+    alt: 'Cachorro dormindo enrolado em uma manta',
+    tag: 'Na sua casa',
+    formValue: 'Cuidados dia e noite',
   },
   {
-    id: 'hosting',
-    title: 'Hospedagem Familiar Selecionada',
-    tagline: 'Uma extensão do lar para hóspedes habituados',
-    description: 'Vagas extremamente limitadas em ambiente residencial aconchegante, sem baias ou isolamento, oferecendo convivência harmoniosa e supervisão contínua para tutores que precisam de cuidados integrais.',
-    image: IMAGES.hero,
-    highlights: [
-      'Ambiente 100% telado e seguro sem risco de fuga',
-      'Supervisão contínua com carinho e rotina personalizada',
-      'Apenas pets sociáveis e com carteira vacinal e vermifugação em dia',
-      'Múltiplas atualizações diárias com fotos e vídeos',
-      'Adaptação prévia obrigatória antes da hospedagem'
-    ],
-    duration: 'Diárias de 24 horas',
-    recommendedFor: 'Cães e pets sociáveis cujos tutores farão viagens mais longas e necessitam de companhia contínua.',
-    basePrice: 95,
+    title: 'Hospedagem e creche',
+    description: 'Ambiente de casa, com espaço externo, sem crianças e livre de fumo. Os pets podem subir no sofá e na cama, e há veterinário por perto.',
+    image: '/img/hospedagem-sofa.jpg',
+    alt: 'Cachorro relaxando no sofá',
+    tag: 'Na casa da Gabrielly',
+    tagVariant: 'warm',
+    formValue: 'Hospedagem',
+  },
+  {
+    title: 'Administração de medicação',
+    description: 'Medicação oral e injetável quando necessário, seguindo a prescrição do médico-veterinário e a autorização do responsável, com registro de cada dose.',
+    image: '/img/pet-tomas.jpg',
+    alt: 'Beagle sentado olhando para a câmera',
+    tag: 'Saúde',
+    tagVariant: 'clinic',
+    formValue: 'Medicação',
+  },
+  {
+    title: 'Fotos e vídeos',
+    description: 'Acompanhe cada atendimento pelo WhatsApp e fique tranquilo(a) mesmo quando estiver longe.',
+    image: '/img/gabrielly-e-pet.jpg',
+    alt: 'Gabrielly tirando selfie com um cão de pelo cacheado',
+    tag: 'Sempre incluso',
   },
 ];
+
+export const DIFFERENTIALS: Differential[] = [
+  { title: 'Olhar atento', description: 'Percebo mudanças de apetite, comportamento ou disposição e aviso você na hora.' },
+  { title: 'Respeito à rotina', description: 'Horários, manias e preferências do seu pet são seguidos à risca.' },
+  { title: 'Manejo seguro', description: 'Medicações e cuidados especiais feitos com técnica e responsabilidade.' },
+  { title: 'Comunicação clara', description: 'Você fica por dentro de tudo durante o atendimento, sem precisar perguntar.' },
+];
+
+export const SKILLS = [
+  'Primeiros socorros',
+  'Medicação oral',
+  'Medicação injetável',
+  'Pets idosos',
+  'Pets com necessidades especiais',
+  'Exercícios para pets',
+  'Transporte de emergência',
+];
+
+export const PETS: Pet[] = [
+  { name: 'Choco', breed: 'American Pit Bull Terrier', image: '/img/pet-choco.jpg' },
+  { name: 'Pepe e Serena', breed: 'SRD', image: '/img/pet-pepe-serena.jpg' },
+  { name: 'Tomás', breed: 'Beagle', image: '/img/pet-tomas.jpg' },
+  { name: 'Moana', breed: 'Raça mista', image: '/img/pet-moana.jpg' },
+  { name: 'Baboo', breed: 'Shih Tzu', image: '/img/pet-baboo.jpg' },
+  { name: 'Paçoca', image: '/img/pet-pacoca.jpg' },
+];
+
+export const STEPS: Step[] = [
+  {
+    title: 'Conte sobre seu pet',
+    description: 'Rotina, personalidade, datas e necessidades especiais, pelo formulário ou direto no WhatsApp. Gosto de saber como ele se dá com outros animais, se toma medicação e se tem alergias ou problemas de saúde.',
+  },
+  {
+    title: 'Combinamos os detalhes',
+    description: 'Alinhamos serviço, duração, horários, endereço e as orientações de cuidado. Se quiser, marcamos um encontro prévio gratuito para eu conhecer vocês.',
+  },
+  {
+    title: 'Seu pet recebe todo carinho',
+    description: 'E você recebe notícias, fotos e vídeos durante o atendimento.',
+  },
+];
+
+export const FORM_SPECIES = [
+  { value: 'Cachorro', label: '🐶 Cachorro' },
+  { value: 'Gato', label: '🐱 Gato' },
+  { value: 'Outro', label: '🐾 Outro' },
+];
+
+export const FORM_SERVICES = [
+  { value: 'Passeio', label: 'Passeio' },
+  { value: 'Visita domiciliar', label: 'Visita domiciliar' },
+  { value: 'Cuidados dia e noite', label: 'Dia e noite' },
+  { value: 'Hospedagem', label: 'Hospedagem' },
+  { value: 'Creche', label: 'Creche' },
+  { value: 'Medicação', label: 'Medicação' },
+];
+
+export const FORM_CITIES = ['Valinhos', 'Vinhedo', 'Campinas', 'Outra da região'];
 
 export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: '1',
-    tutorName: 'Mariana Duarte',
-    petName: 'Bento & Flora',
-    petSpecies: '2 Gatos (Bento é nefropata)',
-    city: 'Valinhos - SP',
-    service: 'Pet Sitter + Medicação Diária',
-    comment: 'Eu tinha pavor de viajar porque o Bento precisa tomar remédio oral duas vezes ao dia e fica muito estressado fora de casa. A Gabrielly foi um anjo! O conhecimento veterinário dela me deu 100% de paz. Recebia vídeos dele ronronando e tomando o remédio sem trauma.',
-    date: 'Setembro de 2026',
-    verifiedSource: 'Sittsy',
-  },
-  {
-    id: '2',
-    tutorName: 'Rodrigo e Paula Alencar',
-    petName: 'Thor',
-    petSpecies: 'Golden Retriever (3 anos)',
-    city: 'Vinhedo - SP',
-    service: 'Dog Walker & Visitas',
-    comment: 'O Thor tem muita energia e puxava muito na guia. A Gabi tem uma paciência incrível e usa métodos gentis. Quando voltamos do trabalho, ele está calmo e feliz. A pontualidade e o carinho com o Thor são impecáveis!',
-    date: 'Agosto de 2026',
-    verifiedSource: 'PetHost',
-  },
-  {
-    id: '3',
-    tutorName: 'Dra. Camila Nogueira',
-    petName: 'Pipoca',
-    petSpecies: 'Gatinha SRD Resgatada',
-    city: 'Campinas - SP (Jardim das Paineiras)',
-    service: 'Pet Sitter Domiciliar',
-    comment: 'A Pipoca se esconde de qualquer visita, mas com a Gabrielly no segundo dia já estava pedindo carinho na barriga. O respeito ao espaço do animal faz toda a diferença. O checklist diário com fotos dá um alívio enorme no coração.',
-    date: 'Outubro de 2026',
-    verifiedSource: 'Sittsy',
-  },
-  {
-    id: '4',
-    tutorName: 'Lucas Ferraz',
-    petName: 'Mel',
-    petSpecies: 'Shih Tzu (Idosinha 11 anos)',
-    city: 'Valinhos - SP',
-    service: 'Acompanhamento Pós-Operatório',
-    comment: 'A Mel precisava de cuidados com colírio a cada 4 horas após uma cirurgia ocular. A Gabrielly foi super pontual, higiênica e atenta. Nota-se de longe a vocação e a formação técnica dela na veterinária.',
-    date: 'Julho de 2026',
-    verifiedSource: 'WhatsApp',
-  },
-];
-
-export const PROTOCOL_STEPS = [
-  {
-    step: '01',
-    title: 'Triagem Inicial Online',
-    subtitle: 'Alinhamento rápido e transparente',
-    description: 'Entendemos a rotina do seu pet, datas necessárias, necessidades clínicas e bairro em Valinhos, Vinhedo ou Campinas.',
-  },
-  {
-    step: '02',
-    title: 'Visita Prévia de Adaptação',
-    subtitle: 'Segurança para o tutor e o animal',
-    description: 'Vou até a sua residência para conhecer o animal, receber as orientações da casa, testar a chave e criar vínculo prévio.',
-  },
-  {
-    step: '03',
-    title: 'Execução do Cuidado',
-    subtitle: 'Pontualidade e zelo técnico',
-    description: 'Alimentação regrada, água fresca, limpeza, brincadeiras, enriquecimento ambiental e administração precisa de remédios.',
-  },
-  {
-    step: '04',
-    title: 'Relatório em Tempo Real',
-    subtitle: 'Tranquilidade na palma da mão',
-    description: 'A cada visita você recebe no WhatsApp um diário detalhado com fotos, vídeos descontraídos e checklist das atividades.',
-  },
-];
-
-export const FAQS: FaqItem[] = [
-  {
-    category: 'visita_previa',
-    question: 'Como funciona a visita prévia de adaptação?',
-    answer: 'Antes do início de qualquer atendimento, agendamos uma visita prévia presencial na sua residência. Esse momento é essencial para que o animal se acostume com minha presença ao seu lado, você me mostre onde ficam os pertences, ração e produtos de limpeza, além de alinharmos os detalhes das chaves e portões.',
-  },
-  {
-    category: 'medicacao',
-    question: 'Você pode administrar qualquer tipo de medicamento?',
-    answer: 'Como estudante e futura médica veterinária com treinamento prático, administro medicações orais (comprimidos, suspensões), tópicas (pomadas, curativos), colírios e injetáveis (como insulina para pets diabéticos), sempre estritamente embasada na prescrição fornecida pelo médico veterinário responsável do seu animal.',
-  },
-  {
-    category: 'seguranca',
-    question: 'Como é feita a guarda e devolução das chaves da residência?',
-    answer: 'A segurança do seu lar é tratada com total sigilo e responsabilidade. As chaves são identificadas sem etiquetas de endereço e mantidas em local seguro. A devolução pode ser combinada pessoalmente no seu retorno ou deixada em local combinado dentro da residência na última visita.',
-  },
-  {
-    category: 'servicos',
-    question: 'E se o meu pet apresentar algum sinal de mal-estar durante o período?',
-    answer: 'Graças à formação veterinária, possuo um olhar clínico treinado para identificar precocemente sinais sutis como apatia, dor, desidratação ou alterações urinárias/fecais. Caso ocorra qualquer anormalidade, entro em contato imediato com você e com a clínica veterinária de sua preferência.',
-  },
-  {
-    category: 'servicos',
-    question: 'Quais cidades e regiões você atende?',
-    answer: 'O atendimento prioritário contempla Valinhos (todos os bairros e condomínios), Vinhedo e bairros de Campinas próximos (como Nova Campinas, Sousas, Paineiras, Alphaville Campinas e Proença). Para outras regiões, consulte disponibilidade.',
-  },
-  {
-    category: 'seguranca',
-    question: 'Quantos animais da mesma família podem ser atendidos por visita?',
-    answer: 'Atendemos múltiplos pets da mesma residência! Em visitas domiciliares, cobrimos até 2 pets no valor padrão, com uma pequena taxa adicional para 3 ou mais animais para garantir que todos recebam o tempo de atenção e carinho individual merecido.',
-  },
+  { name: 'Cristiane F.', text: 'Super profissional! Meu cachorro adora a Gabi, super carinhosa com os bichinhos. Confio de olhos fechados!' },
+  { name: 'Caio', text: 'Recomendo demais o trabalho da Gabrielly, faz tudo com muito carinho, enviou fotos o tempo todo. Agora só deixo minha cachorrinha com ela.' },
+  { name: 'Lucas R.', text: 'Muito responsável e compreensiva com meu cachorro, me deixou atualizado o tempo todo e me mandou fotos diariamente!' },
+  { name: 'Juliana', text: 'Gabi sempre muito atenciosa e carinhosa com meu cachorro Choco! Excelente.' },
+  { name: 'Alexandre A.', text: 'Trabalho sério e com muito amor.' },
+  { name: 'Solei S.', text: 'Ótima profissional!!!!' },
+  { name: 'Paula S.', text: 'Excelente profissional.' },
+  { name: 'Raiane', text: 'Excelente profissional.' },
 ];
